@@ -2,23 +2,21 @@
 using UnityEngine;
 
 [Serializable]
-public class TankManager
-{
-    public Color m_PlayerColor;            
-    public Transform m_SpawnPoint;         
-    [HideInInspector] public int m_PlayerNumber;             
+public class TankManager {
+    public Color m_PlayerColor;
+    public Transform m_SpawnPoint;
+    [HideInInspector] public int m_PlayerNumber;
     [HideInInspector] public string m_ColoredPlayerText;
-    [HideInInspector] public GameObject m_Instance;          
-    [HideInInspector] public int m_Wins;                     
+    [HideInInspector] public GameObject m_Instance;
+    [HideInInspector] public int m_Wins;
 
 
-    private TankMovement m_Movement;       
+    private TankMovement m_Movement;
     private TankShooting m_Shooting;
     private GameObject m_CanvasGameObject;
 
 
-    public void Setup()
-    {
+    public void Setup() {
         m_Movement = m_Instance.GetComponent<TankMovement>();
         m_Shooting = m_Instance.GetComponent<TankShooting>();
         m_CanvasGameObject = m_Instance.GetComponentInChildren<Canvas>().gameObject;
@@ -30,15 +28,13 @@ public class TankManager
 
         MeshRenderer[] renderers = m_Instance.GetComponentsInChildren<MeshRenderer>();
 
-        for (int i = 0; i < renderers.Length; i++)
-        {
+        for (int i = 0; i < renderers.Length; i++) {
             renderers[i].material.color = m_PlayerColor;
         }
     }
 
 
-    public void DisableControl()
-    {
+    public void DisableControl() {
         m_Movement.enabled = false;
         m_Shooting.enabled = false;
 
@@ -46,8 +42,7 @@ public class TankManager
     }
 
 
-    public void EnableControl()
-    {
+    public void EnableControl() {
         m_Movement.enabled = true;
         m_Shooting.enabled = true;
 
@@ -55,8 +50,7 @@ public class TankManager
     }
 
 
-    public void Reset()
-    {
+    public void Reset() {
         m_Instance.transform.position = m_SpawnPoint.position;
         m_Instance.transform.rotation = m_SpawnPoint.rotation;
 

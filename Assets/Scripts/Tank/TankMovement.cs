@@ -1,22 +1,21 @@
 ﻿using UnityEngine;
 
-public class TankMovement : MonoBehaviour
-{
-    public int m_PlayerNumber = 1;         
-    public float m_Speed = 12f;            
-    public float m_TurnSpeed = 180f;       
-    public AudioSource m_MovementAudio;    
-    public AudioClip m_EngineIdling;       
-    public AudioClip m_EngineDriving;      
+public class TankMovement : MonoBehaviour {
+    public int m_PlayerNumber = 1;
+    public float m_Speed = 12f;
+    public float m_TurnSpeed = 180f;
+    public AudioSource m_MovementAudio;
+    public AudioClip m_EngineIdling;
+    public AudioClip m_EngineDriving;
     public float m_PitchRange = 0.2f;
 
     /*
-    private string m_MovementAxisName;     
-    private string m_TurnAxisName;         
-    private Rigidbody m_Rigidbody;         
-    private float m_MovementInputValue;    
-    private float m_TurnInputValue;        
-    private float m_OriginalPitch;         
+    private string m_MovementAxisName;
+    private string m_TurnAxisName;
+    private Rigidbody m_Rigidbody;
+    private float m_MovementInputValue;
+    private float m_TurnInputValue;
+    private float m_OriginalPitch;
 
 
     private void Awake()
@@ -48,32 +47,27 @@ public class TankMovement : MonoBehaviour
     }
     */
 
-    private void Update()
-    {
+    private void Update() {
         // Store the player's input and make sure the audio for the engine is playing.
     }
 
 
-    private void EngineAudio()
-    {
+    private void EngineAudio() {
         // Play the correct audio clip based on whether or not the tank is moving and what audio is currently playing.
     }
 
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         // Move and turn the tank.
     }
 
 
-    private void Move()
-    {
+    private void Move() {
         // Adjust the position of the tank based on the player's input.
     }
 
 
-    private void Turn()
-    {
+    private void Turn() {
         // Adjust the rotation of the tank based on the player's input.
     }
 }
