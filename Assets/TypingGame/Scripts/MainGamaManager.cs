@@ -37,6 +37,18 @@ namespace TypingGame {
 		}
 
 		/// <summary>
+		/// プレイヤーからステータスの変更を受け取る。
+		/// </summary>
+		public void SendPlayerStatus() {
+		}
+
+		/// <summary>
+		/// 敵からステータスの変更を受け取る。
+		/// </summary>
+		public void SendEnemyStatus() {
+		}
+
+		/// <summary>
 		/// GameOverしたときに呼ばれる。
 		/// </summary>
 		public void GameOver() {
