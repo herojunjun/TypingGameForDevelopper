@@ -20,12 +20,29 @@ namespace TypingGame {
             private set;
         }
 
+        public bool IsPlaying {
+            get;
+            private set;
+        }
+
         public void NextQuestion() {
             _userIndex = 0;
             _targetString = _generator.GetNext ();
         }
 
+        public void Play() {
+            IsPlaying = true;
+        }
+
+        public void Pause() {
+            IsPlaying = false;
+        }
+
         void Update() {
+            if (!IsPlaying) {
+                return;
+            }
+
             if (string.IsNullOrEmpty (_targetString)) {
                 // 暫定処理
                 NextQuestion ();
@@ -60,6 +77,10 @@ namespace TypingGame {
         const float boxWidth = 200.0f;
         const float boxHeight = 100.0f;
         void OnGUI () {
+            if (!IsPlaying) {
+                return;
+            }
+
             if (string.IsNullOrEmpty (_targetString)) {
                 return;
             }
