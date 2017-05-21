@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 23674828585536276}
   - component: {fileID: 65952119578335034}
   m_Layer: 0
-  m_Name: Shell
-  m_TagString: Player
+  m_Name: EnemyShell
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -88,7 +88,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1043234156344104}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.2987081, y: 0.29870814, z: 0.5252612}

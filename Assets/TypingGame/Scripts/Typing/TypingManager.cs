@@ -11,6 +11,16 @@ namespace TypingGame {
         private TargetStringGenerator _generator = new TargetStringGenerator();
         private string _missMessage;
 
+		private GameObject playerTank;
+		private Shot shotOfPlayer;
+
+		public void Start(){
+			playerTank = GameObject.FindGameObjectWithTag ("Player");
+			shotOfPlayer = playerTank.GetComponent<Shot> ();
+			MainGameManager.Instance.Initialize ();
+			MainGameManager.Instance.GameStart ();
+		}
+
         public int SuccessCount {
             get;
             private set;
@@ -28,6 +38,7 @@ namespace TypingGame {
         public void NextQuestion() {
             _userIndex = 0;
             _targetString = _generator.GetNext ();
+			Play ();
         }
 
         public void Play() {
@@ -55,9 +66,8 @@ namespace TypingGame {
                     _userIndex++;
                     SuccessCount++;
                 } else {
-                    // TODO: 成功をプレイヤーに伝える
-                    // 暫定処理
-                    NextQuestion ();
+					Pause ();
+					shotOfPlayer.ShotShell (MainGameManager.Instance.GetNowTarget().GetChild(0));
                 }
             } else {
                 for (var c = 'a'; c < 'z'; c++) {

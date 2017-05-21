@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TypingGame;
 
 public class Explosion : MonoBehaviour {
 
@@ -16,10 +17,16 @@ public class Explosion : MonoBehaviour {
 
     }
 
-    void OnCollisionEnter(Collision col) {
-        if (col.gameObject.tag == "Shell") {
-            Instantiate (prefab, transform);
-            Destroy (col.gameObject);
-        }
+	void OnTriggerEnter(Collider col) {
+		if (col.gameObject.tag == "Player" && gameObject.tag == "Enemy") {
+			Instantiate (prefab, transform.position,Quaternion.identity);
+			Destroy (col.gameObject);
+			MainGameManager.Instance.SendEnemyStatus ();
+		}
+		if (col.gameObject.tag == "Enemy" && gameObject.tag == "Player") {
+			Instantiate (prefab, transform.position,Quaternion.identity);
+			Destroy (col.gameObject);
+			MainGameManager.Instance.SendPlayerStatus ();
+		}
     }
 }

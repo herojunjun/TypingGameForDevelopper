@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditorInternal;
 
 namespace TypingGame {
     public class MainGameManager {
@@ -20,20 +21,40 @@ namespace TypingGame {
         private TypingManager _typingManager;
         private int _damageCount;
         private int _killCount;
-        private bool _isPlaying;
+		private bool _isPlaying;
+
+		private GameObject playerTank;
+		private PlayerMove playerMove;
+		private Transform[] Targets;
+		private int _nowTarget = 0;
+		private int playerHP = 10;
+		private int enemyHP = 3;
 
         /// <summary>
         /// ゲームを初期化する。
         /// </summary>
         public void Initialize() {
             _typingManager = GameObject.Find ("GameObject").GetComponent<TypingManager> ();
+			GameObject targetSets = GameObject.Find ("TargetSets");
+			Targets = new Transform[targetSets.transform.childCount];
+			for (int i = 0; i < targetSets.transform.childCount; i++) {
+				Targets [i] = targetSets.transform.GetChild (i);
+				Targets [i].GetComponent<TargetParam> ().SetHp (enemyHP);
+			}
         }
 
         /// <summary>
         /// ゲームを開始する。
         /// </summary>
-        public void GameStart() {
+		public void GameStart() {
+			playerTank = GameObject.FindGameObjectWithTag ("Player");
+			playerMove = playerTank.GetComponent<PlayerMove> ();
+			playerTank.GetComponent<TankDirection> ().SetTarget (Targets [_nowTarget]);
+			_typingManager.Play ();
             _isPlaying = true;
+			for (int i = 1; i < Targets.Length; i++) {
+				Targets [i].gameObject.SetActive (false);
+			}
         }
 
         /// <summary>
@@ -56,8 +77,9 @@ namespace TypingGame {
         public void SendPlayerStatus() {
             _damageCount++;
 
-            if (false) {
+			if (_damageCount > playerHP) {
                 // 倒されたとき
+				Debug.Break();
                 GameOver ();
             }
         }
@@ -66,14 +88,28 @@ namespace TypingGame {
         /// 敵からステータスの変更を受け取る。
         /// </summary>
         public void SendEnemyStatus() {
-            if (false) {
+			TargetParam targetParam = Targets [_nowTarget].GetComponent<TargetParam> ();
+			targetParam.Damage(1);
+			if (targetParam.GetHp()>0) {
                 // 敵が生きているとき
-                _typingManager.NextQuestion ();
+				NextQuestion();
             } else {
                 // 敵を倒したとき
-                _killCount++;
+				_killCount++;
+				targetParam.SetHp (enemyHP);
+				Targets [_nowTarget].gameObject.SetActive (false);
+				if (++_nowTarget >= Targets.Length) {
+					_nowTarget = 0;
+				}
+				Targets [_nowTarget].gameObject.SetActive (true);
+				playerMove.SetTarget (Targets [_nowTarget]);
+				playerTank.GetComponent<TankDirection> ().SetTarget (Targets [_nowTarget]);
             }
         }
+
+		public void NextQuestion(){
+			_typingManager.NextQuestion ();
+		}
 
         /// <summary>
         /// GameOverしたときに呼ばれる。
@@ -82,6 +118,10 @@ namespace TypingGame {
             _typingManager.Pause ();
             int score = CalcScore ();
         }
+
+		public Transform GetNowTarget(){
+			return Targets [_nowTarget];
+		}
 
         private int CalcScore () {
             int successCount = _typingManager.SuccessCount;

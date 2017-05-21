@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 namespace TypingGame {
     public class TankDirection : MonoBehaviour {
@@ -9,21 +10,19 @@ namespace TypingGame {
 
         void Start () {
             _tankTurret = gameObject.transform.Find("TankRenderers").Find ("TankTurret").gameObject;
-            _enemy = GameObject.FindGameObjectWithTag ("Enemy");
         }
 
         void Update () {
-            if (_tankTurret == null) {
-                Debug.Log ("_tankTurret is Not found");
-                return;
-            }
-
             if (_enemy == null) {
                 Debug.Log ("_enemy is Not found");
                 return;
             }
-
-            _tankTurret.transform.LookAt (_enemy.transform);
+			Quaternion targetAngle = Quaternion.LookRotation (_enemy.transform.position - _tankTurret.transform.position);
+			_tankTurret.transform.rotation = Quaternion.Slerp (_tankTurret.transform.rotation, targetAngle, 0.1f);
         }
+
+		public void SetTarget(Transform nextTarget){
+			_enemy = nextTarget.gameObject;
+		}
     }
 }
