@@ -25,6 +25,10 @@ namespace TypingGame {
                     _targetString = _generator.GetNext();
                 }
             }
+
+            if (Input.GetKeyDown (KeyCode.Escape)) {
+                TypingSceneManager.Instance.LoadScene (TypingSceneManager.TitleSceneId);
+            }
         }
 
         const float boxWidth = 200.0f;

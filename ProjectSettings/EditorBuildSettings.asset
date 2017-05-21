@@ -6,5 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/TypingGame/Scenes/TitleScene.unity
+    guid: a3f9502b4b67a425686bddf78b371256
+  - enabled: 1
     path: Assets/TypingGame/Scenes/GameScene.unity
     guid: 7985406f03f6a46e3b6253a0ea062f19
