@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditorInternal;
 
 namespace TypingGame {
     public class MainGameManager {
@@ -20,19 +21,33 @@ namespace TypingGame {
         private TypingManager _typingManager;
         private int _damageCount;
         private int _killCount;
-        private bool _isPlaying;
+		private bool _isPlaying;
+
+		private GameObject playerTank;
+		private PlayerMove playerMove;
+		private Transform[] Targets;
+		private int _nowTarget = 0;
 
         /// <summary>
         /// ゲームを初期化する。
         /// </summary>
         public void Initialize() {
             _typingManager = GameObject.Find ("GameObject").GetComponent<TypingManager> ();
+			GameObject targetSets = GameObject.Find ("TargetSets");
+			Targets = new Transform[targetSets.transform.childCount];
+			for (int i = 0; i < targetSets.transform.childCount; i++) {
+				Targets [i] = targetSets.transform.GetChild (i);
+			}
         }
 
         /// <summary>
         /// ゲームを開始する。
         /// </summary>
-        public void GameStart() {
+		public void GameStart() {
+			playerTank = GameObject.FindGameObjectWithTag ("Player");
+			playerMove = playerTank.GetComponent<PlayerMove> ();
+			Debug.Log (Targets);
+			playerTank.GetComponent<TankDirection> ().SetTarget (Targets [_nowTarget]);
             _isPlaying = true;
         }
 
@@ -72,6 +87,8 @@ namespace TypingGame {
             } else {
                 // 敵を倒したとき
                 _killCount++;
+				playerMove.SetTarget (Targets [++_nowTarget]);
+				playerTank.GetComponent<TankDirection> ().SetTarget (Targets [_nowTarget]);
             }
         }
 
@@ -82,6 +99,10 @@ namespace TypingGame {
             _typingManager.Pause ();
             int score = CalcScore ();
         }
+
+		public Transform GetNowTarget(){
+			return Targets [_nowTarget];
+		}
 
         private int CalcScore () {
             int successCount = _typingManager.SuccessCount;

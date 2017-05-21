@@ -4,11 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class PlayerMove : MonoBehaviour {
-
-	public Transform[] Targets;
+	
 
 	private NavMeshAgent navMeshAgent;
-	private int nowTarget = 0;
 	private bool movable = true;
 
 	// Use this for initialization
@@ -19,27 +17,18 @@ public class PlayerMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (movable) {
-			navMeshAgent.SetDestination (Targets [nowTarget].position);
-		} else {
-			navMeshAgent.SetDestination (transform.position);
-		}
-		if (Input.GetKeyDown (KeyCode.X)) {
-			movable = true;
-		}
+		
 	}
 
-	public void SetMovable(bool isMove){
-		movable = isMove;
+	public void SetTarget(Transform nextTarget){
+		navMeshAgent.SetDestination (nextTarget.position);
+		movable = true;
 	}
-
+		
 	void OnTriggerEnter(Collider col){
 		if (col.gameObject.transform.Find ("EnemyTank") != null) {
+			navMeshAgent.SetDestination (transform.position);
 			movable = false;
-			nowTarget++;
-			if (nowTarget > Targets.Length) {
-				nowTarget = 0;
-			}
 		}
 	}
 }

@@ -16,8 +16,9 @@ public class Explosion : MonoBehaviour {
 
     }
 
-    void OnCollisionEnter(Collision col) {
-        if (col.gameObject.tag == "Shell") {
+	void OnCollisionEnter(Collision col) {
+		Debug.Log (col.gameObject.name);
+		if (col.gameObject.tag == "Shell") {
             Instantiate (prefab, transform);
             Destroy (col.gameObject);
         }

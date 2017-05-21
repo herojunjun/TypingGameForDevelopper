@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Diagnostics;
 using System;
+using TypingGame;
 
 public class Shot : MonoBehaviour {
 
@@ -17,14 +18,14 @@ public class Shot : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         if (Input.GetKeyDown (KeyCode.Z)) {
-            ShotShell (GameObject.FindGameObjectWithTag("Enemy").transform);
+			ShotShell (MainGameManager.Instance.GetNowTarget());
         }
     }
 
     public void ShotShell(Transform target) {
         GameObject newShell = Instantiate (shell, tankTurret.position + Vector3.up * 0.3f, tankTurret.rotation);
         newShell.AddComponent<Rigidbody> ().useGravity = false;
-        Transform enemyTurret = target.Find ("TankRenderers").Find ("TankTurret");
+		Transform enemyTurret = target.Find("EnemyTank").Find ("TankRenderers").Find ("TankTurret");
         newShell.GetComponent<Rigidbody> ().AddForce ((enemyTurret.position - newShell.transform.localPosition).normalized * 1000);
     }
 }
