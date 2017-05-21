@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 82857839756900252}
   - component: {fileID: 82214138026981804}
   - component: {fileID: 114505434201388310}
-  - component: {fileID: 114149173055998910}
+  - component: {fileID: 114144345305620332}
   m_Layer: 9
   m_Name: EnemyTank
   m_TagString: Untagged
@@ -171,7 +171,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1971838547621222}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 30.8, y: 0, z: 29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4820623600778466}
@@ -639,7 +639,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114149173055998910
+--- !u!114 &114144345305620332
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -647,7 +647,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1971838547621222}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8fa276ca0d0c4a71b14ad802aabdb02, type: 3}
+  m_Script: {fileID: 11500000, guid: b53f96ace22f24b688b8e4914115abef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &114505434201388310
