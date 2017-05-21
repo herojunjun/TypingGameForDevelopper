@@ -9,7 +9,7 @@ namespace TypingGame {
 
         void Start () {
             _tankTurret = gameObject.transform.Find("TankRenderers").Find ("TankTurret").gameObject;
-			_enemy = GameObject.FindGameObjectWithTag ("Enemy");
+            _enemy = GameObject.FindGameObjectWithTag ("Enemy");
         }
 
         void Update () {
