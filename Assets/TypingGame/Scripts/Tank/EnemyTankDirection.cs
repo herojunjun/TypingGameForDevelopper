@@ -9,7 +9,7 @@ namespace TypingGame {
 
         void Start () {
             _tankTurret = gameObject.transform.Find("TankRenderers").Find ("TankTurret").gameObject;
-			_player = GameObject.Find ("PlayerTank");
+            _player = GameObject.Find ("PlayerTank");
         }
 
         void Update () {
@@ -18,12 +18,12 @@ namespace TypingGame {
                 return;
             }
 
-			if (_player == null) {
-				Debug.Log ("_player is Not found");
+            if (_player == null) {
+                Debug.Log ("_player is Not found");
                 return;
             }
 
-			_tankTurret.transform.LookAt (_player.transform);
+            _tankTurret.transform.LookAt (_player.transform);
         }
     }
 }
