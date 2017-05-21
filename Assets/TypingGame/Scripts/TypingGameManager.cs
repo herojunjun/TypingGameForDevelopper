@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Random = System.Random;
 
 namespace TypingGame {
@@ -28,7 +27,7 @@ namespace TypingGame {
             }
 
             if (Input.GetKeyDown (KeyCode.Escape)) {
-                SceneManager.LoadSceneAsync("Assets/TypingGame/Scenes/TitleScene.unity", LoadSceneMode.Single);
+                TypingSceneManager.Instance.LoadScene (TypingSceneManager.TitleSceneId);
             }
         }
 

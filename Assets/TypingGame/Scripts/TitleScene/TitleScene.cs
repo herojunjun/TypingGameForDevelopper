@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace TypingGame {
 
@@ -16,7 +15,7 @@ namespace TypingGame {
 
         void Update() {
             if (Input.GetKeyDown (KeyCode.Space)) {
-                SceneManager.LoadSceneAsync("Assets/TypingGame/Scenes/GameScene.unity", LoadSceneMode.Single);
+                TypingSceneManager.Instance.LoadScene (TypingSceneManager.GameSceneId);
             }
         }
 
@@ -26,6 +25,7 @@ namespace TypingGame {
             var center = new Rect (Screen.width / 2 - boxWidth / 2, Screen.height / 2 - boxHeight / 2, boxWidth, boxHeight);
             GUI.Box(center,
                     string.Format("ゲームスタートなら Push Space!"));
+
         }
     }
 }
