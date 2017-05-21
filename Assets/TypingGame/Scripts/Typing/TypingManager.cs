@@ -38,6 +38,7 @@ namespace TypingGame {
         public void NextQuestion() {
             _userIndex = 0;
             _targetString = _generator.GetNext ();
+			Play ();
         }
 
         public void Play() {
@@ -65,6 +66,7 @@ namespace TypingGame {
                     _userIndex++;
                     SuccessCount++;
                 } else {
+					Pause ();
 					shotOfPlayer.ShotShell (MainGameManager.Instance.GetNowTarget());
                 }
             } else {

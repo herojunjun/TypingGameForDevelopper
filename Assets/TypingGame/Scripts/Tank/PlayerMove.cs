@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TypingGame;
 
 public class PlayerMove : MonoBehaviour {
 	
@@ -17,7 +18,7 @@ public class PlayerMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		Camera.main.transform.Translate (new Vector3 (0, Mathf.Sin (Time.frameCount) * 0.005f, 0));
 	}
 
 	public void SetTarget(Transform nextTarget){
@@ -28,6 +29,7 @@ public class PlayerMove : MonoBehaviour {
 	void OnTriggerEnter(Collider col){
 		if (col.gameObject.transform.Find ("EnemyTank") != null) {
 			navMeshAgent.SetDestination (transform.position);
+			MainGameManager.Instance.NextQuestion ();
 			movable = false;
 		}
 	}

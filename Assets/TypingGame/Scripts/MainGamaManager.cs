@@ -28,6 +28,8 @@ namespace TypingGame {
 		private Transform[] Targets;
 		private int _nowTarget = 0;
 
+		private int enemyHP = 3;
+
         /// <summary>
         /// ゲームを初期化する。
         /// </summary>
@@ -37,6 +39,7 @@ namespace TypingGame {
 			Targets = new Transform[targetSets.transform.childCount];
 			for (int i = 0; i < targetSets.transform.childCount; i++) {
 				Targets [i] = targetSets.transform.GetChild (i);
+				Targets [i].GetComponent<TargetParam> ().SetHp (enemyHP);
 			}
         }
 
@@ -46,8 +49,8 @@ namespace TypingGame {
 		public void GameStart() {
 			playerTank = GameObject.FindGameObjectWithTag ("Player");
 			playerMove = playerTank.GetComponent<PlayerMove> ();
-			Debug.Log (Targets);
 			playerTank.GetComponent<TankDirection> ().SetTarget (Targets [_nowTarget]);
+			_typingManager.Play ();
             _isPlaying = true;
         }
 
@@ -81,16 +84,28 @@ namespace TypingGame {
         /// 敵からステータスの変更を受け取る。
         /// </summary>
         public void SendEnemyStatus() {
-            if (false) {
+			TargetParam targetParam = Targets [_nowTarget].GetComponent<TargetParam> ();
+			targetParam.Damage(1);
+			if (targetParam.GetHp()>0) {
                 // 敵が生きているとき
-                _typingManager.NextQuestion ();
+				NextQuestion();
             } else {
                 // 敵を倒したとき
-                _killCount++;
-				playerMove.SetTarget (Targets [++_nowTarget]);
+				_killCount++;
+				targetParam.SetHp (enemyHP);
+				Targets [_nowTarget].gameObject.SetActive (false);
+				if (++_nowTarget >= Targets.Length) {
+					_nowTarget = 0;
+				}
+				Targets [_nowTarget].gameObject.SetActive (true);
+				playerMove.SetTarget (Targets [_nowTarget]);
 				playerTank.GetComponent<TankDirection> ().SetTarget (Targets [_nowTarget]);
             }
         }
+
+		public void NextQuestion(){
+			_typingManager.NextQuestion ();
+		}
 
         /// <summary>
         /// GameOverしたときに呼ばれる。

@@ -17,9 +17,7 @@ public class Shot : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetKeyDown (KeyCode.Z)) {
-			ShotShell (MainGameManager.Instance.GetNowTarget());
-        }
+        
     }
 
     public void ShotShell(Transform target) {

@@ -17,8 +17,8 @@ namespace TypingGame {
                 Debug.Log ("_enemy is Not found");
                 return;
             }
-
-            _tankTurret.transform.LookAt (_enemy.transform);
+			Quaternion targetAngle = Quaternion.LookRotation (_enemy.transform.position - _tankTurret.transform.position);
+			_tankTurret.transform.rotation = Quaternion.Slerp (_tankTurret.transform.rotation, targetAngle, 0.1f);
         }
 
 		public void SetTarget(Transform nextTarget){
