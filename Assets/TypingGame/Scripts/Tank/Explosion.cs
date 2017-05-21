@@ -17,11 +17,16 @@ public class Explosion : MonoBehaviour {
 
     }
 
-	void OnCollisionEnter(Collision col) {
-		if (col.gameObject.tag == "Shell") {
+	void OnTriggerEnter(Collider col) {
+		if (col.gameObject.tag == "Player" && gameObject.tag == "Enemy") {
 			Instantiate (prefab, transform.position,Quaternion.identity);
-            Destroy (col.gameObject);
+			Destroy (col.gameObject);
 			MainGameManager.Instance.SendEnemyStatus ();
-        }
+		}
+		if (col.gameObject.tag == "Enemy" && gameObject.tag == "Player") {
+			Instantiate (prefab, transform.position,Quaternion.identity);
+			Destroy (col.gameObject);
+			MainGameManager.Instance.SendPlayerStatus ();
+		}
     }
 }

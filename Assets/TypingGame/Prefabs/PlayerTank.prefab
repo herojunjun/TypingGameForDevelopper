@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 82741899933461832}
   - component: {fileID: 114045990582464562}
   - component: {fileID: 114931089950682368}
+  - component: {fileID: 114654061143145478}
   m_Layer: 9
   m_Name: PlayerTank
   m_TagString: Player
@@ -541,7 +542,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1147372707383034}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.7, z: 1.6}
@@ -740,6 +741,18 @@ MonoBehaviour:
   m_EngineIdling: {fileID: 8300000, guid: 4932ab25b84dd7649b80af68a9660ddc, type: 3}
   m_EngineDriving: {fileID: 8300000, guid: d7ca9fb5aa30155449192b23d7fb3336, type: 3}
   m_PitchRange: 0.1
+--- !u!114 &114654061143145478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1147372707383034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74c612280d0ec4be5b5d7273df9e7a99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 2}
 --- !u!114 &114931089950682368
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -27,7 +27,7 @@ namespace TypingGame {
 		private PlayerMove playerMove;
 		private Transform[] Targets;
 		private int _nowTarget = 0;
-
+		private int playerHP = 10;
 		private int enemyHP = 3;
 
         /// <summary>
@@ -52,6 +52,9 @@ namespace TypingGame {
 			playerTank.GetComponent<TankDirection> ().SetTarget (Targets [_nowTarget]);
 			_typingManager.Play ();
             _isPlaying = true;
+			for (int i = 1; i < Targets.Length; i++) {
+				Targets [i].gameObject.SetActive (false);
+			}
         }
 
         /// <summary>
@@ -74,8 +77,9 @@ namespace TypingGame {
         public void SendPlayerStatus() {
             _damageCount++;
 
-            if (false) {
+			if (_damageCount > playerHP) {
                 // 倒されたとき
+				Debug.Break();
                 GameOver ();
             }
         }

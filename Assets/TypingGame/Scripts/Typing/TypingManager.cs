@@ -67,7 +67,7 @@ namespace TypingGame {
                     SuccessCount++;
                 } else {
 					Pause ();
-					shotOfPlayer.ShotShell (MainGameManager.Instance.GetNowTarget());
+					shotOfPlayer.ShotShell (MainGameManager.Instance.GetNowTarget().GetChild(0));
                 }
             } else {
                 for (var c = 'a'; c < 'z'; c++) {
